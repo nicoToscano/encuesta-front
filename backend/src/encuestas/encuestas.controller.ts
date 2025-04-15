@@ -16,6 +16,11 @@ export class EncuestaController {
     return this.encuestaService.crearUsuario(usuario);
   }
 
+  @Get('usuarios/:correo')
+  async obtenerUsuario(@Param('correo') correo: string) {
+    return this.encuestaService.getUsuario(correo);
+  }
+
   @Get('preguntas')
   async obtenerPreguntas() {
     return this.encuestaService.getPreguntas();

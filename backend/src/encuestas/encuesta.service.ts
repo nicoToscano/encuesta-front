@@ -29,6 +29,17 @@ export class EncuestaService {
     return data[0]; // Devuelve el primer usuario creado
   }
 
+  async getUsuario(correo: string) {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .select('*')
+      .eq('correo', correo)
+      .single(); // 👈 Esto le dice a Supabase que devuelva un solo registro
+  
+    if (error) throw error;
+    return data;
+  }
+
   
   async getPreguntas() {
     const { data, error } = await supabase.from('preguntas').select('*');
