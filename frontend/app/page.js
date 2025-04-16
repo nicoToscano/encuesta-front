@@ -1,38 +1,71 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { set } from "react-hook-form";
+import Swal from "sweetalert2";
 
 export default function Registro() {
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
+
   const router = useRouter();
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  const handleGet = async (e) => {
-    e.preventDefault(); // Evita la recarga de la página
-    try {
-      if (!correo) {
-        alert("Por favor, ingresa un correo.");
-        return;
-      }
-  
-      // Realizamos la solicitud al endpoint con el correo como parámetro
-      const res = await fetch(`http://localhost:3000/encuestas/usuarios/${correo}`);
-      if (!res.ok) {
-        throw new Error("Error al obtener el usuario");
-      }
-  
-      // Obtenemos la respuesta del servidor
-      const usuarioExistente = await res.json();
-  
-      if (usuarioExistente) {
-        alert(`El correo ya existe en la base de datos: ${JSON.stringify(usuarioExistente)}`);
-      } else {
-        console.log("El correo no existe en la base de datos.");
-      }
-    } catch (error) {
-      console.error("Error en handleGet:", error);
-      alert("Hubo un error al obtener el usuario. Por favor, intenta de nuevo.");
+    const res = await fetch("http://localhost:3000/encuestas/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ correo, contrasena }),
+    });
+
+    const data = await res.json();
+
+    alert(JSON.stringify(data.usuario));
+
+    if (data.success) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Inicio de sesión exitoso",
+        text: `Bienvenido ${data.usuario.nombre}`,
+      });
+
+      // Guardamos el ID del usuario y el nombre para usarlo después
+      localStorage.setItem("usuario_id", data.usuario_id);
+      localStorage.setItem("usuario_nombre", data.nombre);
+      // Redirigimos a la encuesta
+      router.push("/home");
+
+    } else {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Correo o contraseña incorrectos",
+      });
     }
   };
 
@@ -44,18 +77,26 @@ export default function Registro() {
         </div>
 
         <form
-          onSubmit={handleGet}
+          onSubmit={handleLogin}
           className="p-6 space-y-6 rounded-lg sm:w-1/2 h-full flex flex-col justify-center"
         >
           <h1 className="text-3xl font-bold text-center text-gray-800">
             Iniciar sesión
           </h1>
-          
+
           <input
             className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
             placeholder="Correo electrónico"
             value={correo}
             onChange={(e) => setCorreo(e.target.value)}
+            required
+          />
+
+          <input
+            className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            placeholder="Contraseña"
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
             required
           />
 
