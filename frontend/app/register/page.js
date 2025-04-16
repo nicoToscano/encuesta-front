@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function Registro() {
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
+  const [contrasena, setContrasena] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -13,7 +14,7 @@ export default function Registro() {
     const res = await fetch("http://localhost:3000/encuestas/usuarios", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, correo }),
+      body: JSON.stringify({ nombre, correo, contrasena }),
     });
 
     const data = await res.json();
@@ -22,7 +23,7 @@ export default function Registro() {
     localStorage.setItem("usuario_id", data.id);
 
     // Redirigimos a la encuesta
-    router.push("/home");
+    router.push("/");
   };
 
   return (
@@ -54,11 +55,19 @@ export default function Registro() {
             onChange={(e) => setCorreo(e.target.value)}
             required
           />
+          <input
+            className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            placeholder="Correo"
+            type="email"
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
+            required
+          />
           <button
             type="submit"
             className="bg-yellow-300 text-black p-3 w-full rounded-lg hover:bg-yellow-400 transition duration-300 cursor-pointer"
           >
-            Iniciar Encuesta
+            Registrarse
           </button>
         </form>
       </div>
