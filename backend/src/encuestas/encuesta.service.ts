@@ -36,10 +36,10 @@ export class EncuestaService {
       .eq('correo', correo)
       .single(); // 👈 Esto le dice a Supabase que devuelva un solo registro
   
-    if (error) throw error;
+    if (error || !data) return null;
     return data;
   }
-
+  
   
   async getPreguntas() {
     const { data, error } = await supabase.from('preguntas').select('*');
