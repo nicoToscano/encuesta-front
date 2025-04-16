@@ -1,15 +1,37 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Registro() {
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
+  const [confirmarContrasena, setConfirmarContrasena] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (contrasena !== confirmarContrasena) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Las contraseñas no coinciden",
+        text: "Por favor, verifica que ambas contraseñas sean iguales.",
+      });
+      return;
+    }
 
     const res = await fetch("http://localhost:3000/encuestas/usuarios", {
       method: "POST",
@@ -57,12 +79,22 @@ export default function Registro() {
           />
           <input
             className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
-            placeholder="Correo"
-            type="email"
+            placeholder="Contraseña"
+            type="password"
             value={contrasena}
             onChange={(e) => setContrasena(e.target.value)}
             required
           />
+
+          <input
+            className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            placeholder="Confirmar contraseña"
+            type="password"
+            value={confirmarContrasena}
+            onChange={(e) => setConfirmarContrasena(e.target.value)}
+            required
+          />
+
           <button
             type="submit"
             className="bg-yellow-300 text-black p-3 w-full rounded-lg hover:bg-yellow-400 transition duration-300 cursor-pointer"

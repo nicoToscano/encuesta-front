@@ -106,6 +106,13 @@ export default function Registro() {
           >
             Siguiente
           </button>
+
+          <a
+            href="/register"
+            className="text-center text-gray-500 hover:text-yellow-900 transition duration-300 hover:underline"
+          >
+            ¿No tienes una cuenta? Regístrate
+          </a>
         </form>
       </div>
     </div>
