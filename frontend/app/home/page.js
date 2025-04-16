@@ -11,6 +11,7 @@ export default function Home() {
   // const usuario_id = searchParams.get("usuario_id");
 
   const usuarioId = localStorage.getItem("usuario_id");
+  const usuarioNombre = localStorage.getItem("usuario_nombre");
 
   const [preguntas, setPreguntas] = useState([]);
 
@@ -28,6 +29,7 @@ export default function Home() {
 
   return (
     <>
+      <h1 className="text-2xl font-semibold mb-4">Bienvenido, {usuarioNombre} 👋</h1>
       <Encuesta preguntas={preguntas} usuario_id={usuarioId} />
       <VerRespuestas />
     </>
