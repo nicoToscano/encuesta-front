@@ -69,8 +69,8 @@ export default function Registro() {
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <div className="flex flex-col sm:flex-row items-stretch bg-white rounded-lg mx-8 h-[75vh]">
-        <div className="p-6 space-y-6 rounded-lg sm:w-1/2 h-full flex items-center justify-center">
+      <div className="flex flex-col sm:flex-row items-center justify-center bg-white rounded-lg h-screen md:h-[75vh] shadow-lg md:w-3/4 lg:w-1/2">
+        <div className="space-y-6 rounded-lg sm:w-1/2 h-full flex items-center justify-center">
           <img src="/finanza.png" alt="Logo" className="" />
         </div>
 
