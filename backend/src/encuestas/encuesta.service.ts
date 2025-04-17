@@ -47,6 +47,12 @@ export class EncuestaService {
     return data;
   }
 
+  async getUsuarios() {
+    const { data, error } = await supabase.from('usuarios').select('*');
+    if (error) throw error;
+    return data;
+  }
+
   async updateUsuario(correo: string, nuevaContrasena: string) {
     const { data, error } = await supabase
       .from('usuarios')
