@@ -84,7 +84,7 @@ export default function Registro() {
 
   return (
     <div className="flex items-center justify-center min-h-screen ">
-      <div className="flex flex-col sm:flex-row items-stretch bg-white rounded-lg mx-8 h-[75vh]">
+      <div className="flex flex-col sm:flex-row items-center justify-center bg-white rounded-lg mx-8 mt-8 mb-8 shadow-lg sm:w-3/4 lg:w-1/2 ">
         <div className="p-6 space-y-6 rounded-lg sm:w-1/2 h-full flex items-center justify-center">
           <img src="/finanza.png" alt="Logo" className="" />
         </div>
@@ -135,6 +135,23 @@ export default function Registro() {
           >
             Registrarse
           </button>
+
+          <p className="text-center text-gray-600">
+            ¿Ya tienes una cuenta?{" "}
+            <a href="/" className="text-yellow-500 hover:underline">
+              Iniciar sesión
+            </a>
+          </p>
+          <p className="text-center text-gray-600">
+            Al registrarte, aceptas nuestros{" "}
+            <a href="#" className="text-yellow-500 hover:underline">
+              Términos y condiciones
+            </a>{" "}
+            y nuestra{" "}
+            <a href="#" className="text-yellow-500 hover:underline">
+              Política de privacidad
+            </a>
+          </p>
         </form>
       </div>
     </div>
