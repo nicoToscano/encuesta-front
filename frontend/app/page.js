@@ -24,14 +24,12 @@ export default function Registro() {
 
     const data = await res.json();
 
-    alert(JSON.stringify(data.usuario));
-
     if (data.success) {
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 3000,
+        timer: 4000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -45,8 +43,8 @@ export default function Registro() {
       });
 
       // Guardamos el ID del usuario y el nombre para usarlo después
-      localStorage.setItem("usuario_id", data.usuario_id);
-      localStorage.setItem("usuario_nombre", data.nombre);
+      localStorage.setItem("usuario_id", data.usuario.id);
+      localStorage.setItem("usuario_nombre", data.usuario.nombre);
       // Redirigimos a la encuesta
       router.push("/home");
 
@@ -55,7 +53,7 @@ export default function Registro() {
         toast: true,
         position: "top-end",
         showConfirmButton: false,
-        timer: 3000,
+        timer: 4000,
         timerProgressBar: true,
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
@@ -85,6 +83,7 @@ export default function Registro() {
           </h1>
 
           <input
+            type="email"
             className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
             placeholder="Correo electrónico"
             value={correo}
@@ -93,6 +92,7 @@ export default function Registro() {
           />
 
           <input
+            type="password"
             className="border border-gray-300 p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"
             placeholder="Contraseña"
             value={contrasena}
