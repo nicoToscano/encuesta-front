@@ -31,7 +31,7 @@ export class EncuestaController {
     if (!usuarios) {
       return { success: false, mensaje: 'No hay usuarios registrados' };
     }
-    return { success: true, mensaje: 'Usuarios encontrados', usuarios };
+    return { usuarios };
   }
 
   @Post('login')
