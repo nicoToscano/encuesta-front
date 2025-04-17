@@ -25,6 +25,15 @@ export class EncuestaController {
     return { success: true, mensaje: 'Usuario encontrado', usuario };
   }
 
+  @Get('usuarios')
+  async obtenerUsuarios(){
+    const usuarios = await this.encuestaService.getUsuarios();
+    if (!usuarios) {
+      return { success: false, mensaje: 'No hay usuarios registrados' };
+    }
+    return { success: true, mensaje: 'Usuarios encontrados', usuarios };
+  }
+
   @Post('login')
   async validarUsuario(@Body() body: { correo: string; contrasena: string }) {
     const { correo, contrasena } = body;
