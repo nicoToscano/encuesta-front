@@ -16,6 +16,15 @@ export class EncuestaController {
     return this.encuestaService.crearUsuario(usuario);
   }
 
+  @Get('usuarios/:correo')
+  async obtenerUsuario(@Param('correo') correo: string) {
+    const usuario = await this.encuestaService.getUsuario(correo);
+    if (!usuario) {
+      return { success: false, mensaje: 'Usuario no encontrado' };
+    }
+    return { success: true, mensaje: 'Usuario encontrado', usuario };
+  }
+
   @Post('login')
   async validarUsuario(@Body() body: { correo: string; contrasena: string }) {
     const { correo, contrasena } = body;
@@ -53,7 +62,7 @@ export class EncuestaController {
     }
     return { success: true, mensaje: 'Contraseña actualizada con éxito' };
   }
-  
+
   @Get('preguntas')
   async obtenerPreguntas() {
     return this.encuestaService.getPreguntas();
