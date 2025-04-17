@@ -19,6 +19,13 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 export class EncuestaService {
 
   async crearUsuario(usuario: CreateUsuarioDto) {
+    // Verificar si el correo ya está registrado
+    const existingUser = await this.getUsuario(usuario.correo);
+    if (existingUser) {
+      throw new Error("El correo ya está registrado");
+    }
+
+    // Crear el usuario si no existe
     const { data, error } = await supabase
       .from('usuarios')
       .insert([usuario])
