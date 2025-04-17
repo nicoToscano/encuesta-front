@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put} from '@nestjs/common';
 import { EncuestaService } from './encuesta.service'; 
 import { CreateRespuestaDto } from './dto/create-respuesta.dto';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
@@ -32,6 +32,28 @@ export class EncuestaController {
     return { success: true, mensaje: 'Usuario validado', usuario };
   }
 
+  @Put('reset-password')
+  async resetPassword(@Body() body: { correo: string; nuevaContrasena: string }) {
+    const { correo, nuevaContrasena } = body;
+    const usuario = await this.encuestaService.getUsuario(correo);
+
+    if (!usuario) {
+      return { success: false, mensaje: 'Usuario no encontrado' };
+    }
+
+    if (usuario.contrasena === nuevaContrasena) {
+      return { success: false, mensaje: 'La nueva contraseña no puede ser igual a la anterior' };
+    }
+
+    // Actualizar la contraseña del usuario
+    const error = await this.encuestaService.updateUsuario(correo, nuevaContrasena);
+
+    if (error) {
+      return { success: false, mensaje: 'Error al actualizar la contraseña' };
+    }
+    return { success: true, mensaje: 'Contraseña actualizada con éxito' };
+  }
+  
   @Get('preguntas')
   async obtenerPreguntas() {
     return this.encuestaService.getPreguntas();

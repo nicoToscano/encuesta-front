@@ -46,6 +46,18 @@ export class EncuestaService {
     if (error || !data) return null;
     return data;
   }
+
+  async updateUsuario(correo: string, nuevaContrasena: string) {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .update({ contrasena: nuevaContrasena })
+      .eq('correo', correo)
+      .single(); // 👈 Esto le dice a Supabase que devuelva un solo registro
+      
+    if (error || !data) return null;
+    return data;
+
+  }
   
   
   async getPreguntas() {
