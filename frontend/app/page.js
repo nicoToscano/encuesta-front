@@ -34,7 +34,7 @@ export default function Registro() {
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
           toast.onmouseleave = Swal.resumeTimer;
-        }
+        },
       });
       Toast.fire({
         icon: "success",
@@ -47,7 +47,6 @@ export default function Registro() {
       localStorage.setItem("usuario_nombre", data.usuario.nombre);
       // Redirigimos a la encuesta
       router.push("/home");
-
     } else {
       const Toast = Swal.mixin({
         toast: true,
@@ -58,7 +57,7 @@ export default function Registro() {
         didOpen: (toast) => {
           toast.onmouseenter = Swal.stopTimer;
           toast.onmouseleave = Swal.resumeTimer;
-        }
+        },
       });
       Toast.fire({
         icon: "error",
@@ -107,12 +106,20 @@ export default function Registro() {
             Siguiente
           </button>
 
-          <a
-            href="/register"
-            className="text-center text-gray-500 hover:text-yellow-900 transition duration-300 hover:underline"
-          >
-            ¿No tienes una cuenta? Regístrate
-          </a>
+          <p className="text-center text-gray-600">
+            ¿No tienes una cuenta?{" "}
+            <a href="/register" className="text-yellow-500 hover:underline">
+              Regístrate
+            </a>
+          </p>
+
+          <p className="text-center text-gray-600">
+            ¿Olvidaste tu contraseña?{" "}
+            <a href="/forgot-password" className="text-yellow-500 hover:underline">
+              Recuperar contraseña
+            </a>
+          </p>
+
         </form>
       </div>
     </div>
