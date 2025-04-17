@@ -42,7 +42,7 @@ const Encuesta = ({ preguntas, usuario_id }) => {
       icon: "success"
     });
 
-    router.push('/');
+    router.replace('/');
   };
 
   return (
