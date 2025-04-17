@@ -33,19 +33,53 @@ export default function Registro() {
       return;
     }
 
-    const res = await fetch("http://localhost:3000/encuestas/usuarios", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, correo, contrasena }),
-    });
+    try {
+      const res = await fetch("http://localhost:3000/encuestas/usuarios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, correo, contrasena }),
+      });
 
-    const data = await res.json();
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Error al registrar usuario");
+      }
 
-    // Guardamos el ID del usuario para usarlo después
-    localStorage.setItem("usuario_id", data.id);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Registro exitoso",
+      });
 
-    // Redirigimos a la encuesta
-    router.push("/");
+      router.push("/");
+    } catch (error) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Error al registrar",
+        text: "El correo ya está registrado.",
+      });
+    }
   };
 
   return (
