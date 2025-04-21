@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { EncuestaModule } from './encuestas/encuesta.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(EncuestaModule);
@@ -10,6 +11,16 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   });
+
+
+  const config = new DocumentBuilder()
+    .setTitle('Encuestas API')
+    .setDescription('API para gestionar encuestas')
+    .setVersion('1.0')
+    .addTag('encuestas')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(3000);
 }
