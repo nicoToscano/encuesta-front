@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { set } from "react-hook-form";
@@ -108,16 +109,16 @@ export default function Registro() {
 
           <p className="text-center text-gray-600">
             ¿No tienes una cuenta?{" "}
-            <a href="/register" className="text-yellow-500 hover:underline">
+            <Link href="/register" className="text-yellow-500 hover:underline">
               Regístrate
-            </a>
+            </Link>
           </p>
 
           <p className="text-center text-gray-600">
             ¿Olvidaste tu contraseña?{" "}
-            <a href="/forgot-password" className="text-yellow-500 hover:underline">
+            <Link href="/forgot-password" className="text-yellow-500 hover:underline">
               Recuperar contraseña
-            </a>
+            </Link>
           </p>
 
         </form>
