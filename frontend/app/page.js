@@ -15,7 +15,7 @@ export default function Registro() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:3000/encuestas/login", {
+    const res = await fetch("/encuestas/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
