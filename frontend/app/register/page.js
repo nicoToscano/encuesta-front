@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -138,19 +139,19 @@ export default function Registro() {
 
           <p className="text-center text-gray-600">
             ¿Ya tienes una cuenta?{" "}
-            <a href="/" className="text-yellow-500 hover:underline">
+            <Link href="/" className="text-yellow-500 hover:underline">
               Iniciar sesión
-            </a>
+            </Link>
           </p>
           <p className="text-center text-gray-600">
             Al registrarte, aceptas nuestros{" "}
-            <a href="#" className="text-yellow-500 hover:underline">
+            <Link href="#" className="text-yellow-500 hover:underline">
               Términos y condiciones
-            </a>{" "}
+            </Link>{" "}
             y nuestra{" "}
-            <a href="#" className="text-yellow-500 hover:underline">
+            <Link href="#" className="text-yellow-500 hover:underline">
               Política de privacidad
-            </a>
+            </Link>
           </p>
         </form>
       </div>
