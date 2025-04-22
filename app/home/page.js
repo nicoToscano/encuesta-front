@@ -26,7 +26,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPreguntas = async () => {
-      const res = await fetch("http://localhost:3000/encuestas/preguntas");
+      const res = await fetch("https://encuesta-back.onrender.com/encuestas/preguntas");
       const data = await res.json();
       setPreguntas(data);
     };

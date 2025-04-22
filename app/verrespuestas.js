@@ -6,7 +6,7 @@ export default function VerRespuestas() {
   const [respuestas, setRespuestas] = useState([]);
 
   const handleBuscar = async () => {
-    const res = await fetch(`http://localhost:3000/encuestas/respuestas/${usuarioId}`);
+    const res = await fetch(`https://encuesta-back.onrender.com/encuestas/respuestas/${usuarioId}`);
     const data = await res.json();
     setRespuestas(data);
   };

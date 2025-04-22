@@ -15,7 +15,7 @@ export default function Registro() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/encuestas/login", {
+    const res = await fetch("https://encuesta-back.onrender.com/encuestas/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -30,7 +30,7 @@ const Encuesta = ({ preguntas, usuario_id }) => {
       respuesta: value,
     }));
 
-    await fetch("http://localhost:3000/encuestas/respuestas", {
+    await fetch("https://encuesta-back.onrender.com/encuestas/respuestas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(respuestas),
