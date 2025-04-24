@@ -34,7 +34,7 @@ export default function ForgotPassword() {
 
     try {
       const res = await fetch(
-        "https://encuesta-back.onrender.com/encuestas/reset-password",
+        "https://encuesta-back.onrender.com/users/reset-password",
         {
           method: "PUT",
           headers: {
