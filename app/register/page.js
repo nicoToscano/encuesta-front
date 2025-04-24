@@ -35,7 +35,7 @@ export default function Registro() {
     }
 
     try {
-      const res = await fetch("https://encuesta-back.onrender.com/encuestas/usuarios", {
+      const res = await fetch("https://encuesta-back.onrender.com/users/create-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, correo, contrasena }),
