@@ -15,10 +15,10 @@ export default function Registro() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("https://encuesta-back.onrender.com/encuestas/login", {
+    const res = await fetch("http://localhost:3000/users/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
       },
       body: JSON.stringify({ correo, contrasena }),
     });
